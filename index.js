@@ -18,7 +18,9 @@
 function ilkiniDon(stringArray, callback) {
   return callback(stringArray[0])
 }
-console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin+metin}));
+//console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin+metin}));
+
+
 
 // Başlangıç Challenge'ı Sonu
 
@@ -64,12 +66,12 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
-}
-
-
-
+function takimSkoru(){
+  let sayi= Math.floor((Math.random()*16)+10)
+   return sayi;
+  
+ }
+  //console.log(takimSkoru());
 
 /* Görev 3: macSonucu() 
 Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
@@ -86,13 +88,20 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(callback,quart){
+  let EvSahibi = 0 , KonukTakim = 0;
+  
+  for(let i =0; i<quart; i++){
+    EvSahibi += callback();
+    KonukTakim = KonukTakim + callback();
+
+  }
+  return {
+    "EvSahibi" : EvSahibi,
+    "KonukTakim" : KonukTakim
+  }
 }
-
-
-
-
+//console.log(macSonucu(takimSkoru,4));
 
 
 /* Zorlayıcı Görev 4: periyotSkoru()
@@ -109,11 +118,15 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-
+function periyotSkoru(callback) {
+  let result = {
+  EvSahibi : callback(),
+  KonukTakim : callback(), 
+  
+  }
+  return result
 }
-
+console.log(periyotSkoru(takimSkoru))
 
 /* Zorlayıcı Görev 5: skorTabelasi() 
 Aşağıdaki skorTabelasi() fonksiyonunu kullanarak aşağıdakileri yapınız:
@@ -146,10 +159,31 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-}
+function skorTabelasi(periyotSkoru,takimSkoru,periyot) {
+  const skorArray =[];
+  const macSkoru = {
+    EvSahibi:0,
+    KonukTakim:0}
 
+  for(let i=1 ; i<= periyot ; i++)
+  {
+  const pSkoru = periyotSkoru(takimSkoru);
+  //periyot skorlarını maç skorlarını ekledik.
+  macSkoru.EvSahibi += pSkoru.EvSahibi;
+  macSkoru.KonukTakim += pSkoru.KonukTakim;
+  //periyot metnini oluşturduk
+  const pMetni =`${i}. Periyot: Ev Sahibi ${pSkoru.EvSahibi} - Konuk Takım ${pSkoru.KonukTakim}`
+  skorArray.push(pMetni);
+  }
+    // ya uzarsa
+  // maç skor metni oluşturduk
+
+  const pMetni =`Maç Sonucu: Ev Sahibi ${macSkoru.EvSahibi} - Konuk Takım ${macSkoru.KonukTakim}`
+  skorArray.push(pMetni);
+
+  return skorArray
+}
+console.log(skorTabelasi(periyotSkoru, takimSkoru, 4));
 
 
 
