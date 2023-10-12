@@ -171,7 +171,7 @@ function skorTabelasi(periyotSkoru,takimSkoru,periyot) {
   //periyot skorlarını maç skorlarını ekledik.
   macSkoru.EvSahibi += pSkoru.EvSahibi;
   macSkoru.KonukTakim += pSkoru.KonukTakim;
-  //periyot metnini oluşturduk
+  //periyot metnini oluşturduk.
   const pMetni =`${i}. Periyot: Ev Sahibi ${pSkoru.EvSahibi} - Konuk Takım ${pSkoru.KonukTakim}`
   skorArray.push(pMetni);
   }
